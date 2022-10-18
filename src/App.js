@@ -30,6 +30,8 @@ const App = () => {
       dfault.map((v, i) => {
         return setTimeout(() => {
           setTask(v);
+          arr.push(v);
+
           setTimeout(() => {
             setTask("");
           }, 500 * (i + 1));
