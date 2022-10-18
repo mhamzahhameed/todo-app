@@ -1,21 +1,45 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 
 const App = () => {
   const [task, setTask] = useState("");
   const [arr, setArr] = useState([]);
   const [searchTerm, setSearchTerm] = useState([]);
+  const [dfault, setDefault] = useState([
+    "washing",
+    "picking",
+    "designing",
+    "functioning",
+    "sleeping",
+  ]);
   // const [preArr, setPreArr] = useState([]);
 
   // Function to push in Array
-  const addTask = () => {
+  const addTask = useCallback(() => {
     if (task?.length) {
       setArr([...arr, task]);
       setTask("");
     } else {
       alert("Please enter your task");
     }
+  });
+
+  // Function to add default Tasks in the task list
+  const addDefaultTask = () => {
+    if (!task.length) {
+      dfault.map((v, i) => {
+        return setTimeout(() => {
+          setTask(v);
+          setTimeout(() => {
+            setTask("");
+          }, 500 * (i + 1));
+        }, 2000 * (i + 1));
+      });
+    }
   };
+  useEffect(() => {
+    addDefaultTask();
+  }, []);
   // const savePreArr = useCallback(() => {
   //   setPreArr(arr);
   // }, []);
@@ -24,7 +48,7 @@ const App = () => {
     if (e.target.value) {
       setSearchTerm(
         arr.filter((a) => {
-          return a.match(e.target.value);
+          return a.toLowerCase().match(e.target.value.toLowerCase());
         })
       );
       // setArr(searchTerm);
