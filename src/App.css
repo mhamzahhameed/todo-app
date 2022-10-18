@@ -1,16 +1,26 @@
 .App {
   text-align: center;
+  box-sizing: border-box;
+}
+body {
+  background-color: beige;
+  font-family: "Lato", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input {
+  padding-top: 3px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  border-color: lightgray;
+  border-style: groove;
+}
+#SearchInput {
+  margin-top: 30px;
+  width: 30%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input:focus {
+  outline: 1.5px solid darkgray;
 }
 
 .App-header {
