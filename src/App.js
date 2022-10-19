@@ -22,7 +22,8 @@ const App = () => {
     } else {
       alert("Please enter your task");
     }
-  }, [task]);
+    // eslist-disable-next-line
+  }, [arr, task]);
 
   // Function to add default Tasks in the task list
   const addDefaultTask = () => {
@@ -41,8 +42,8 @@ const App = () => {
 
   useEffect(() => {
     addDefaultTask();
+    // eslint-disable-next-line
   }, []);
-  // eslint-disable-next-lin
 
   const filterTasks = (e) => {
     if (e.target.value) {
@@ -58,10 +59,13 @@ const App = () => {
     }
   };
   // Function to delete specific task
-  const deleteTask = useCallback((ind) => {
-    arr?.splice(ind, 1);
-    setArr([...arr]);
-  }, []);
+  const deleteTask = useCallback(
+    (ind) => {
+      arr?.splice(ind, 1);
+      setArr([...arr]);
+    },
+    [arr]
+  );
 
   return (
     <div className='App'>
