@@ -5,7 +5,7 @@ const App = () => {
   const [task, setTask] = useState("");
   const [arr, setArr] = useState([]);
   const [searchTerm, setSearchTerm] = useState([]);
-  const [dfault, setDefault] = useState([
+  const [dfault] = useState([
     "washing",
     "picking",
     "designing",
@@ -22,29 +22,27 @@ const App = () => {
     } else {
       alert("Please enter your task");
     }
-  });
+  }, [task]);
 
   // Function to add default Tasks in the task list
   const addDefaultTask = () => {
-    if (!task.length) {
-      dfault.map((v, i) => {
-        return setTimeout(() => {
-          setTask(v);
+    dfault.map((v, i) => {
+      return setTimeout(() => {
+        setTask(v);
+        setTimeout(() => {
           arr.push(v);
 
-          setTimeout(() => {
-            setTask("");
-          }, 500 * (i + 1));
-        }, 2000 * (i + 1));
-      });
-    }
+          setTask("");
+        }, 500 * (i + 1));
+      }, 2500 * (i + 1));
+    });
+    clearTimeout(addDefaultTask);
   };
+
   useEffect(() => {
     addDefaultTask();
   }, []);
-  // const savePreArr = useCallback(() => {
-  //   setPreArr(arr);
-  // }, []);
+  // eslint-disable-next-lin
 
   const filterTasks = (e) => {
     if (e.target.value) {
@@ -60,13 +58,10 @@ const App = () => {
     }
   };
   // Function to delete specific task
-  const deleteTask = useCallback(
-    (ind) => {
-      arr?.splice(ind, 1);
-      setArr([...arr]);
-    },
-    [arr]
-  );
+  const deleteTask = useCallback((ind) => {
+    arr?.splice(ind, 1);
+    setArr([...arr]);
+  }, []);
 
   return (
     <div className='App'>
