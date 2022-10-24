@@ -12,6 +12,7 @@ const App = () => {
     "functioning",
     "sleeping",
   ]);
+
   // const [preArr, setPreArr] = useState([]);
 
   // Function to push in Array
